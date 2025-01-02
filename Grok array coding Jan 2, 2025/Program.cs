@@ -31,7 +31,8 @@ class WeatherStation // recall that a class is a blueprint for creating objects
     // Also the above is NOT an array - this is confusing BUT the [] only signifies an array when ALSO declaring a variable
     // In the above we are not declaring a variable actually but instead indicating the property being dealt with here
     // acceps as input an array of integers 
-    { 
+    // remember that Temperatures is a property providing controlled access to the actual array stored in _temperatures
+    {
         get { return _temperatures;}
         set
         {
@@ -72,7 +73,7 @@ class WeatherStation // recall that a class is a blueprint for creating objects
     // The constructor. Find out why termed the constructor
     public WeatherStation(string location, int days)
     { 
-        Location = location;
+        Location = location; // see below "location" = Vancouver = Location = will be converted to "value" by C# in setter above
         Temperatures = new int[days]; // Check if correct? Temperatures is tied to days? ALSO IS THIS AN ARRAY??
     }
 }
@@ -80,7 +81,14 @@ class Program
 {
     static void Main()
     {
-        WeatherStation station = new WeatherStation("Vancouver", 7); // WHAT IS THE 7 ???
+        WeatherStation station = new WeatherStation("Vancouver", 7);
+        /*
+         * So, the chain of events is: 
+         * 1)"Vancouver" is passed to the constructor as the location parameter. (see line 74)
+         * 2) This location value is used to set the Location property.( see line 76)
+         * 3) The Location property's setter uses this location as value, which is then assigned to the private field _location (see line 25)
+           
+         */
         Console.WriteLine($"Weather for {station.Location}:");
         // simulate a weeks weather
         for (int i = 0; i < 7; i++)
